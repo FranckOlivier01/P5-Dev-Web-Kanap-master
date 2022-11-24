@@ -59,27 +59,28 @@ fetch('http://localhost:3000/api/products/'+productId)
     console.log(error)
 })
 
+// FRANCK
 
 // Ajouter les produits au panier
 
 // Récupérer l'id du produit, la quantité et la couleur choisie
 
-function nombreProduit() {
-    let quantite = document.getElementById("quantity")
-    return quantite.value
+// function nombreProduit() {
+//     let quantite = document.getElementById("quantity")
+//     return quantite.value
    
-} 
+// } 
 
-function couleurChoisie() {
-    let couleur = document.getElementById('colors')
-    return color.value
-}
+// function couleurChoisie() {
+//     let couleur = document.getElementById('colors')
+//     return color.value
+// }
 
 // Injection dans le panier des différents éléments
-let panier = document.getElementById('addToCart').addEventListener("click", (e)=>{
-    e.preventDefault()
-    alert("formulaire envoyé")
-})
+// let panier = document.getElementById('addToCart').addEventListener("click", (e)=>{
+//     e.preventDefault()
+//   
+// })
 
 // function ajoutPanier() { panier.addEventListener("click",()=>{
 //     let quantiteTotal = parseInt(nombreProduit())
@@ -90,3 +91,4 @@ let panier = document.getElementById('addToCart').addEventListener("click", (e)=
 //     console.log('ajourPanier')
 // }
 
+// FIN  FRANCK
