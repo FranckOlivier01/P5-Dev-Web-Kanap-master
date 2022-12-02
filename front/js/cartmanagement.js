@@ -51,3 +51,22 @@ function addToCart(id,color,quantity){
 
     updateProductsInLocalStorage(products)
 }
+
+// Fonction pour supprimer un produit du localstorage
+
+ function deleteProductFromlocalStorage(id,color){
+    let products = getALLProductsFromLocalStorage()
+    if(products[id][color]){
+        if(Object.keys(products[id]).length > 1){
+            delete products[id][color]
+        }else{
+            delete products[id]
+        }
+    }
+
+    updateProductsInLocalStorage(products)
+    alert('Produit bien supprimer du panier')
+    location.reload()
+ }
+
+ // Fonction pour modifier la quantité
