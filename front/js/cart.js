@@ -1,7 +1,7 @@
 const productsInCart = getALLProductsFromLocalStorage()
 const sectionCartItems = document.getElementById('cart__items')
 
-//Récupérer tous les produits du panier avec la boucleci-desous
+//Récupérer tous les produits du panier avec la boucle ci-desous
 
 for(let [id,colors] of Object.entries(productsInCart)){
     for(let [color,quantity] of Object.entries(colors)){
@@ -44,6 +44,12 @@ for(let [id,colors] of Object.entries(productsInCart)){
               })
 
               // Fonction pour modifier la quantité
+              let changeQuantities = document.getElementsByClassName('itemQuantity')
+              Object.values(changeQuantities).forEach(changeQuantity =>{
+                changeQuantity.addEventListener("change",function(e){
+                  const userQuantity = changeQuantity.value
+                })
+              })
               
             })
             .catch(function(error){
