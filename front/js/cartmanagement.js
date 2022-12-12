@@ -70,3 +70,18 @@ function addToCart(id,color,quantity){
  }
 
  // Fonction pour modifier la quantité
+
+ function changeQuantityFromLocalStorage(id,color,){
+    let products = getALLProductsFromLocalStorage()
+    if(products[id][color]){
+        if(Object.keys(products[id]).length > 1){
+            delete products[id][color]
+        }else{
+            delete products[id]
+        }
+    }
+
+    updateProductsInLocalStorage(products)
+    alert('Quantité bien modifier du panier')
+    location.reload()
+ }

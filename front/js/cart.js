@@ -48,6 +48,10 @@ for(let [id,colors] of Object.entries(productsInCart)){
               Object.values(changeQuantities).forEach(changeQuantity =>{
                 changeQuantity.addEventListener("change",function(e){
                   const userQuantity = changeQuantity.value
+                  const article = changeQuantity.closest("article")
+                  const productId = article.getAttribute("data-id")
+                  const productColor = article.getAttribute("data-color")
+                  changeQuantityFromLocalStorage(productId,productColor,userQuantity)
                 })
               })
               
