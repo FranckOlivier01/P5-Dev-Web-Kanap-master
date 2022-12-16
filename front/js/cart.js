@@ -1,6 +1,10 @@
 const productsInCart = getALLProductsFromLocalStorage()
 const sectionCartItems = document.getElementById('cart__items')
 
+let totalOfProducts = 0
+let totalCartPrice = 0
+const totalQuantity = document.getElementById('totalQuantity')
+const totalPrice = document.getElementById('totalPrice')
 //Récupérer tous les produits du panier avec la boucle ci-desous
 
 for(let [id,colors] of Object.entries(productsInCart)){
@@ -55,6 +59,14 @@ for(let [id,colors] of Object.entries(productsInCart)){
                 })
               })
               
+              //Gestion quantité total des produits
+
+              totalOfProducts += parseInt(quantity)
+              totalQuantity.innerHTML += parseInt(totalOfProducts)
+
+              //Gestion prix total du panier
+
+
             })
             .catch(function(error){
                 console.log(error)
@@ -65,3 +77,29 @@ for(let [id,colors] of Object.entries(productsInCart)){
         })
     }
 }
+
+let formBtnOrder = document.getElementById('order')
+
+let firstName = document.getElementById('firstName')
+let firstNameErrorMsg = document.getElementById('firstNameErrorMsg')
+let nameRegex = /^[0-9a-zA-Z\s{2,}]/i
+
+formBtnOrder.addEventListener("click", function(e){
+  e.preventDefault()
+  let countCheckForm = 0  
+
+  if (firstName.value ===""){
+    firstName.style.border = "red 1px solid"
+    firstNameErrorMsg.innerHTML = "Ce champ ne doit pas être vide"
+  }else if(firstName.value.length < 3){
+    firstName.style.border = "red 1px solid"
+    firstNameErrorMsg.innerHTML = "Ce champ doit comporter au moins 3 caractères"
+  } else if(firstName.value.match(nameRegex) === null){
+    firstName.style.border = "red 1px solid"
+    firstNameErrorMsg.innerHTML = "Ce champ n'est pas valide"
+  } else{ 
+    firstName.style.border = "green 1px solid"
+    firstNameErrorMsg.innerHTML = ""
+    countCheckForm++
+  }
+})
