@@ -91,6 +91,16 @@ let emailRegex = /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+
 let lastName = document.getElementById('lastName')
 let lastNameErrorMsg = document.getElementById('lastNameErrorMsg')
 
+let address = document.getElementById('address')
+let addressErrorMsg = document.getElementById('addressErrorMsg')
+
+let city = document.getElementById('city')
+let cityErrorMsg = document.getElementById('cityErrorMsg')
+
+let email = document.getElementById('email')
+let emailErrorMsg = document.getElementById('emailErrorMsg')
+
+
 formBtnOrder.addEventListener("click", function(e){
   e.preventDefault()
   let countCheckForm = 0  
@@ -125,6 +135,50 @@ formBtnOrder.addEventListener("click", function(e){
     countCheckForm++
   }
 // ajouter les autres tests des champs adresse ville et email
+  if (address.value ===""){
+    address.style.border = "red 1px solid"
+    addressErrorMsg.innerHTML = "Ce champ ne doit pas être vide"
+  }else if(address.value.length < 3){
+    address.style.border = "red 1px solid"
+    addressErrorMsg.innerHTML = "Ce champ doit comporter au moins 3 caractères"
+  } else if(address.value.match(nameRegex) === null){
+    address.style.border = "red 1px solid"
+    addressErrorMsg.innerHTML = "Ce champ n'est pas valide"
+  } else{ 
+    address.style.border = "green 1px solid"
+    addressErrorMsg.innerHTML = ""
+    countCheckForm++
+  }
+
+  if (city.value ===""){
+    city.style.border = "red 1px solid"
+    cityErrorMsg.innerHTML = "Ce champ ne doit pas être vide"
+  }else if(city.value.length < 3){
+    city.style.border = "red 1px solid"
+    cityErrorMsg.innerHTML = "Ce champ doit comporter au moins 3 caractères"
+  } else if(city.value.match(nameRegex) === null){
+    city.style.border = "red 1px solid"
+    cityErrorMsg.innerHTML = "Ce champ n'est pas valide"
+  } else{ 
+    city.style.border = "green 1px solid"
+    cityErrorMsg.innerHTML = ""
+    countCheckForm++
+  }
+
+  if (email.value ===""){
+    email.style.border = "red 1px solid"
+    emailErrorMsg.innerHTML = "Ce champ ne doit pas être vide"
+  }else if(email.value.length < 3){
+    email.style.border = "red 1px solid"
+    emailErrorMsg.innerHTML = "Ce champ doit comporter au moins 3 caractères"
+  } else if(email.value.match(emailRegex) === null){
+    email.style.border = "red 1px solid"
+    emailErrorMsg.innerHTML = "Ce champ n'est pas valide"
+  } else{ 
+    email.style.border = "green 1px solid"
+    emailErrorMsg.innerHTML = ""
+    countCheckForm++
+  }
 
 
   if(countCheckForm === 5 && Object.keys(productsInCart).length > 0){
@@ -132,6 +186,9 @@ formBtnOrder.addEventListener("click", function(e){
       firstName:firstName.value,
       lastName:lastName.value,
       // compléter les autres à la suite
+      address:address.value,
+      city:city.value,
+      email:email.value,
     }
     const products = []
     for(let [id] of Object.entries(productsInCart)){
@@ -143,7 +200,18 @@ formBtnOrder.addEventListener("click", function(e){
       headers:{"Content-type":"application/json; charset=UTF-8"},
       body:JSON.stringify({contact,products})
     })
-    .then()
-    .catch() 
+    .then(function(response){
+      response.json()
+      .then(function(orderResponse){
+        alert('Nous avons bien reçu votre commande')
+        location.replace(`confirmation.html?id=${orderResponse.orderId}`)
+      })
+      .catch((errorResponse)=>{
+        console.log(errorResponse)      
+      }) 
+    })
+    .catch((errorOrder)=>{
+      console.log(errorOrder)      
+    }) 
   }
 })
