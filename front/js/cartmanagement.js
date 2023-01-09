@@ -77,13 +77,7 @@ function addToCart(id,color,quantity){
         products[id][color] = quantity
     }
     
-        // if(Object.keys(products[id]).length > 1){
-        //     // changer delete par ...
-        //      products[id][color]
-        // }else{
-        //      products[id]
-        // }
-  
+    
 
     updateProductsInLocalStorage(products)
     alert('Quantité bien modifier du panier')
